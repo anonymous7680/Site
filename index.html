@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dry.Coffee76</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Style de la page de mot de passe */
+        #password-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #0e0e0e;
+            color: #e0e0e0;
+            text-align: center;
+        }
+        #password-page h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+        #password-input {
+            padding: 1rem;
+            font-size: 1.5rem;
+            width: 250px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        #password-btn {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #password-btn:hover {
+            background: #ff5252;
+        }
+        #error-msg {
+            color: #ff6b6b;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Page de mot de passe -->
+    <div id="password-page">
+        <h1>Dry.Coffee76</h1>
+        <p>Entrez le code d'accès pour continuer</p>
+        <input type="password" id="password-input" placeholder="Code d'accès" autocomplete="off">
+        <button id="password-btn">Accéder</button>
+        <p id="error-msg"></p>
+    </div>
+
+    <!-- Contenu principal du site (caché au départ) -->
+    <div id="main-content" style="display: none;">
+
+        <header>
+            <nav>
+                <div class="logo">
+                    <img src="chat.jpg" alt="Logo Chat" class="logo-img">
+                    <span>Dry.Coffee76</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#nouveaux">🥳 Nouveaux produits</a></li>
+                    <li><a href="#fleurs">🌳 Fleurs</a></li>
+                    <li><a href="#hash">🍫 Hash</a></li>
+                    <li><a href="#panier">🛍️ Panier</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="accueil" class="hero">
+            <h1>Bienvenue sur Dry.Coffee76</h1>
+            <p>Découvrez nos produits premium de qualité supérieure</p>
+            <a href="#nouveaux" class="btn">Voir les nouveautés</a>
+        </section>
+
+        <section id="nouveaux" class="section">
+            <h2>🥳 Nouveaux produits</h2>
+            <div class="grid">
+                <div class="card">Produit 1</div>
+                <div class="card">Produit 2</div>
+                <div class="card">Produit 3</div>
+            </div>
+        </section>
+
+        <section id="fleurs" class="section dark">
+            <h2>🌳 Fleurs</h2>
+            <div class="grid">
+                <div class="card">Fleur A</div>
+                <div class="card">Fleur B</div>
+                <div class="card">Fleur C</div>
+            </div>
+        </section>
+
+        <section id="hash" class="section">
+            <h2>🍫 Hash</h2>
+            <div class="grid">
+                <div class="card">Hash Premium</div>
+                <div class="card">Hash Traditionnel</div>
+                <div class="card">Hash Spécial</div>
+            </div>
+        </section>
+
+        <section id="panier" class="section dark">
+            <h2>🛍️ Panier</h2>
+            <p>Votre panier est actuellement vide.</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Dry.Coffee76 - Tous droits réservés</p>
+        </footer>
+    </div>
+
+    <script>
+        const correctPassword = "442442";
+        const passwordInput = document.getElementById('password-input');
+        const passwordBtn = document.getElementById('password-btn');
+        const errorMsg = document.getElementById('error-msg');
+        const passwordPage = document.getElementById('password-page');
+        const mainContent = document.getElementById('main-content');
+
+        // Vérifie si l'utilisateur a déjà entré le bon code (stocké dans localStorage)
+        if (localStorage.getItem('accessGranted') === 'true') {
+            passwordPage.style.display = 'none';
+            mainContent.style.display = 'block';
+        }
+
+        passwordBtn.addEventListener('click', () => {
+            if (passwordInput.value === correctPassword) {
+                localStorage.setItem('accessGranted', 'true');
+                passwordPage.style.display = 'none';
+                mainContent.style.display = 'block';
+            } else {
+                errorMsg.textContent = "Code incorrect. Réessayez.";
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+
+        // Permet d'appuyer sur Entrée
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                passwordBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
