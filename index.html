@@ -3,282 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dry.Coffee76 - Boutique CBD</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Dry.Coffee76</title>
     <style>
-        /* Styles pour la page de mot de passe (inchangés) */
-        #password-page {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: #0e0e0e;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #0f1117;
             color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #1a1f2e;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #8a9a5b;
+            text-transform: uppercase;
+        }
+
+        nav {
+            background-color: #161b2a;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        nav a {
+            color: #b0b8a0;
+            text-decoration: none;
+            font-size: 1.3em;
+            margin: 0 25px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #4a5a3a;
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            color: #8a9a5b;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 2px solid #4a5a3a;
+            padding-bottom: 10px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background-color: #1a1f2e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            height: 250px;
+            background-color: #2a2f42;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-info {
+            padding: 20px;
             text-align: center;
         }
-        #password-page h1 {
-            font-size: 3rem;
-            margin-bottom: 2rem;
+
+        .product-info h3 {
+            font-size: 1.4em;
+            color: #ffffff;
+            margin-bottom: 10px;
         }
-        #password-input {
-            padding: 1rem;
-            font-size: 1.5rem;
-            width: 250px;
-            border: none;
-            border-radius: 8px;
-            margin-bottom: 1rem;
+
+        .product-info p {
+            color: #a0a8b0;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #8a9a5b;
+        }
+
+        footer {
+            background-color: #161b2a;
             text-align: center;
+            padding: 30px;
+            margin-top: 80px;
+            color: #777;
+            font-size: 0.9em;
         }
-        #password-btn {
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        #password-btn:hover {
-            background: #ff5252;
-        }
-        #error-msg {
-            color: #ff6b6b;
-            margin-top: 1rem;
-            font-size: 1.1rem;
-        }
-        /* Ajouts pour recherche */
-        #search-bar {
-            margin: 2rem auto;
-            width: 80%;
-            max-width: 600px;
-        }
-        #search-input {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 8px;
-            background: #2d2d2d;
-            color: #e0e0e0;
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Page de mot de passe -->
-    <div id="password-page">
-        <h1>Dry.Coffee76 - Boutique CBD</h1>
-        <p>Entrez le code d'accès pour continuer</p>
-        <input type="password" id="password-input" placeholder="Code d'accès" autocomplete="off">
-        <button id="password-btn">Accéder</button>
-        <p id="error-msg"></p>
-    </div>
+    <header>
+        <h1>Dry.Coffee76</h1>
+    </header>
 
-    <!-- Contenu principal -->
-    <div id="main-content" style="display: none;">
+    <nav>
+        <a href="#nouveaux">Nouveaux produits</a>
+        <a href="#fleurs">Fleurs</a>
+        <a href="#hash">Hash</a>
+    </nav>
 
-        <header>
-            <nav>
-                <div class="logo">
-                    <img src="chat.jpg" alt="Logo Chat" class="logo-img">
-                    <span>Dry.Coffee76</span>
+    <div class="container">
+
+        <h2 id="nouveaux" class="section-title">Nouveaux produits</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://via.placeholder.com/300x250/2a2f42/4a5a3a?text=Produit+1');"></div>
+                <div class="product-info">
+                    <h3>Premium Selection</h3>
+                    <p>Qualité supérieure, arômes intenses</p>
+                    <div class="price">29,90 €</div>
                 </div>
-                <ul class="nav-links">
-                    <li><a href="#nouveaux">🥳 Nouveaux produits</a></li>
-                    <li><a href="#fleurs">🌳 Fleurs</a></li>
-                    <li><a href="#hash">🍫 Hash</a></li>
-                    <li><a href="#panier">🛍️ Panier (<span id="cart-count">0</span>)</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <section id="accueil" class="hero">
-            <h1>Bienvenue sur Dry.Coffee76</h1>
-            <p>Découvrez nos produits CBD premium, légaux et de qualité supérieure (THC < 0.3%)</p>
-            <a href="#nouveaux" class="btn">Voir les nouveautés</a>
-        </section>
-
-        <!-- Barre de recherche -->
-        <div id="search-bar">
-            <input type="text" id="search-input" placeholder="Rechercher un produit CBD...">
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://via.placeholder.com/300x250/2a2f42/4a5a3a?text=Produit+2');"></div>
+                <div class="product-info">
+                    <h3>Exotic Blend</h3>
+                    <p>Notes uniques et puissantes</p>
+                    <div class="price">34,90 €</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://via.placeholder.com/300x250/2a2f42/4a5a3a?text=Produit+3');"></div>
+                <div class="product-info">
+                    <h3>Classic Reserve</h3>
+                    <p>Équilibré et raffiné</p>
+                    <div class="price">27,90 €</div>
+                </div>
+            </div>
         </div>
 
-        <section id="nouveaux" class="section">
-            <h2>🥳 Nouveaux produits CBD</h2>
-            <div class="grid product-grid">
-                <div class="card product-card" data-name="Amnesia Haze CBD" data-price="25" data-category="fleurs">
-                    <img src="https://source.unsplash.com/random/300x200/?cbd,flower" alt="Amnesia Haze CBD">
-                    <h3>Amnesia Haze CBD (10g)</h3>
-                    <p>Fleur CBD relaxante, arômes citronnés. Prix: 25€</p>
-                    <button class="add-to-cart">Ajouter au panier</button>
-                </div>
-                <div class="card product-card" data-name="Moroccan Hash CBD" data-price="30" data-category="hash">
-                    <img src="https://source.unsplash.com/random/300x200/?cbd,hash" alt="Moroccan Hash CBD">
-                    <h3>Moroccan Hash CBD (5g)</h3>
-                    <p>Hash CBD premium, texture souple. Prix: 30€</p>
-                    <button class="add-to-cart">Ajouter au panier</button>
-                </div>
-                <div class="card product-card" data-name="OG Kush CBD" data-price="20" data-category="fleurs">
-                    <img src="https://source.unsplash.com/random/300x200/?cbd,kush" alt="OG Kush CBD">
-                    <h3>OG Kush CBD (10g)</h3>
-                    <p>Fleur CBD équilibrée, effets calmants. Prix: 20€</p>
-                    <button class="add-to-cart">Ajouter au panier</button>
+        <h2 id="fleurs" class="section-title">Fleurs</h2>
+        <div class="products-grid">
+            <!-- Ajoute autant de cartes que tu veux -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://via.placeholder.com/300x250/2a2f42/4a5a3a?text=Fleur+1');"></div>
+                <div class="product-info">
+                    <h3>Green Harmony</h3>
+                    <p>Arôme frais et naturel</p>
+                    <div class="price">32,90 €</div>
                 </div>
             </div>
-        </section>
+            <!-- Plus de produits... -->
+        </div>
 
-        <section id="fleurs" class="section dark">
-            <h2>🌳 Fleurs CBD</h2>
-            <div class="grid product-grid">
-                <div class="card product-card" data-name="Lemon Haze CBD" data-price="22" data-category="fleurs">
-                    <img src="https://source.unsplash.com/random/300x200/?cbd,lemon" alt="Lemon Haze CBD">
-                    <h3>Lemon Haze CBD (10g)</h3>
-                    <p>Arômes frais et citronnés. Prix: 22€</p>
-                    <button class="add-to-cart">Ajouter au panier</button>
-                </div>
-                <div class="card product-card" data-name="Blue Dream CBD" data-price="28" data-category="fleurs">
-                    <img src="https://source.unsplash.com/random/300x200/?cbd,blue" alt="Blue Dream CBD">
-                    <h3>Blue Dream CBD (10g)</h3>
-                    <p>Effets relaxants, saveur fruitée. Prix: 28€</p>
-                    <button class="add-to-cart">Ajouter au panier</button>
+        <h2 id="hash" class="section-title">Hash</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://via.placeholder.com/300x250/2a2f42/4a5a3a?text=Hash+1');"></div>
+                <div class="product-info">
+                    <h3>Traditional Press</h3>
+                    <p>Texture riche et authentique</p>
+                    <div class="price">39,90 €</div>
                 </div>
             </div>
-        </section>
+            <!-- Plus de produits... -->
+        </div>
 
-        <section id="hash" class="section">
-            <h2>🍫 Hash CBD</h2>
-            <div class="grid product-grid">
-                <div class="card product-card" data-name="Afghan Hash CBD" data-price="35" data-category="hash">
-                    <img src="https://source.unsplash.com/random/300x200/?cbd,afghan" alt="Afghan Hash CBD">
-                    <h3>Afghan Hash CBD (5g)</h3>
-                    <p>Hash dense et aromatique. Prix: 35€</p>
-                    <button class="add-to-cart">Ajouter au panier</button>
-                </div>
-                <div class="card product-card" data-name="Bubble Hash CBD" data-price="40" data-category="hash">
-                    <img src="https://source.unsplash.com/random/300x200/?cbd,bubble" alt="Bubble Hash CBD">
-                    <h3>Bubble Hash CBD (5g)</h3>
-                    <p>Hash pur et puissant. Prix: 40€</p>
-                    <button class="add-to-cart">Ajouter au panier</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="panier" class="section dark">
-            <h2>🛍️ Panier</h2>
-            <div id="cart-items"></div>
-            <p>Total: <span id="cart-total">0</span>€</p>
-            <button id="clear-cart">Vider le panier</button>
-            <form id="order-form">
-                <h3>Passer commande</h3>
-                <input type="text" placeholder="Nom" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Adresse de livraison" required></textarea>
-                <button type="submit">Envoyer la commande</button>
-            </form>
-        </section>
-
-        <footer>
-            <p>&copy; 2026 Dry.Coffee76 - Boutique CBD légale en France - Tous droits réservés</p>
-        </footer>
     </div>
 
-    <script>
-        const correctPassword = "442442";
-        const passwordInput = document.getElementById('password-input');
-        const passwordBtn = document.getElementById('password-btn');
-        const errorMsg = document.getElementById('error-msg');
-        const passwordPage = document.getElementById('password-page');
-        const mainContent = document.getElementById('main-content');
+    <footer>
+        © 2026 Dry.Coffee76 - Tous droits réservés
+    </footer>
 
-        if (localStorage.getItem('accessGranted') === 'true') {
-            passwordPage.style.display = 'none';
-            mainContent.style.display = 'block';
-        }
-
-        passwordBtn.addEventListener('click', () => {
-            if (passwordInput.value === correctPassword) {
-                localStorage.setItem('accessGranted', 'true');
-                passwordPage.style.display = 'none';
-                mainContent.style.display = 'block';
-            } else {
-                errorMsg.textContent = "Code incorrect. Réessayez.";
-                passwordInput.value = '';
-                passwordInput.focus();
-            }
-        });
-
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                passwordBtn.click();
-            }
-        });
-
-        // Fonctionnalités panier
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        updateCart();
-
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const card = e.target.closest('.product-card');
-                const item = {
-                    name: card.dataset.name,
-                    price: parseFloat(card.dataset.price),
-                    quantity: 1
-                };
-                const existing = cart.find(i => i.name === item.name);
-                if (existing) {
-                    existing.quantity++;
-                } else {
-                    cart.push(item);
-                }
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCart();
-            });
-        });
-
-        document.getElementById('clear-cart').addEventListener('click', () => {
-            cart = [];
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCart();
-        });
-
-        function updateCart() {
-            const cartItems = document.getElementById('cart-items');
-            const cartCount = document.getElementById('cart-count');
-            const cartTotal = document.getElementById('cart-total');
-            cartItems.innerHTML = '';
-            let total = 0;
-            cart.forEach(item => {
-                total += item.price * item.quantity;
-                const div = document.createElement('div');
-                div.innerHTML = `${item.name} x${item.quantity} - ${item.price * item.quantity}€ <button class="remove-item">Supprimer</button>`;
-                div.querySelector('.remove-item').addEventListener('click', () => {
-                    cart = cart.filter(i => i.name !== item.name);
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    updateCart();
-                });
-                cartItems.appendChild(div);
-            });
-            cartCount.textContent = cart.length;
-            cartTotal.textContent = total;
-        }
-
-        // Recherche
-        document.getElementById('search-input').addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            document.querySelectorAll('.product-card').forEach(card => {
-                const name = card.dataset.name.toLowerCase();
-                card.style.display = name.includes(query) ? 'block' : 'none';
-            });
-        });
-
-        // Formulaire commande (simulation)
-        document.getElementById('order-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Commande envoyée ! (Simulation - En vrai, intègre un backend pour emails/paiements)');
-        });
-    </script>
 </body>
 </html>
