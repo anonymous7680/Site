@@ -1,219 +1,456 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dry.Coffee76</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop ta Watche — Montres de Luxe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --text: #f5f5f5;
+      --text-light: #c0c0c0;
+      --gold: #d4af37;
+      --gold-dark: #b8972e;
+      --card-bg: #161616;
+    }
 
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #0f1117;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background:var(--bg);
+      color:var(--text);
+      font-family:'Inter', sans-serif;
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    h1,h2,h3 { font-family:'Playfair Display', serif; font-weight:500; }
 
-        header {
-            background-color: #1a1f2e;
-            padding: 30px 20px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-        }
+    header {
+      position:fixed;
+      top:0; width:100%; z-index:1000;
+      padding:1.5rem 5%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(15,15,15,0.75);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(212,175,55,0.08);
+      transition:all 0.4s ease;
+    }
+    header.scrolled { padding:1rem 5%; background:rgba(15,15,15,0.92); }
 
-        header h1 {
-            font-size: 3.5em;
-            font-weight: 700;
-            letter-spacing: 4px;
-            color: #8a9a5b;
-            text-transform: uppercase;
-        }
+    .logo { font-size:1.8rem; font-weight:700; letter-spacing:1px; color:var(--gold); }
 
-        nav {
-            background-color: #161b2a;
-            padding: 15px 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-        }
+    .nav-right { display:flex; align-items:center; gap:2.5rem; }
+    nav a {
+      color:var(--text-light);
+      text-decoration:none;
+      font-weight:500;
+      transition:color 0.3s;
+      position:relative;
+    }
+    nav a:hover, nav a.active { color:var(--gold); }
+    nav a::after {
+      content:''; position:absolute; width:0; height:1.5px; bottom:-4px; left:0;
+      background:var(--gold); transition:width 0.35s ease;
+    }
+    nav a:hover::after, nav a.active::after { width:100%; }
 
-        nav a {
-            color: #b0b8a0;
-            text-decoration: none;
-            font-size: 1.3em;
-            margin: 0 25px;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
+    .cart-icon {
+      position:relative;
+      cursor:pointer;
+      font-size:1.5rem;
+      color:var(--text-light);
+      transition:color 0.3s;
+    }
+    .cart-icon:hover { color:var(--gold); }
+    .cart-count {
+      position:absolute; top:-8px; right:-10px;
+      background:var(--gold); color:#000;
+      font-size:0.75rem; font-weight:600;
+      width:20px; height:20px;
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+    }
 
-        nav a:hover {
-            background-color: #4a5a3a;
-            color: #ffffff;
-            transform: translateY(-3px);
-        }
+    /* Hero */
+    .hero {
+      height:100vh; min-height:800px;
+      background:linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
+                 url('https://images.unsplash.com/photo-1524592094714-0f25c5025c32?auto=format&fit=crop&q=80&w=2400') center/cover no-repeat;
+      display:flex; align-items:center; justify-content:center; text-align:center;
+    }
+    .hero-content { max-width:900px; padding:0 5%; }
+    .hero h1 { font-size:clamp(3.8rem,9vw,8rem); line-height:0.92; margin-bottom:1.5rem; color:white; text-shadow:0 8px 30px rgba(0,0,0,0.7); }
+    .hero p { font-size:1.35rem; max-width:620px; margin:0 auto 2.5rem; color:var(--text-light); }
 
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+    .btn {
+      display:inline-block; padding:1rem 2.6rem;
+      background:transparent; border:1.5px solid var(--gold); color:var(--gold);
+      font-weight:500; letter-spacing:1px; text-transform:uppercase;
+      text-decoration:none; border-radius:50px; transition:all 0.4s ease; cursor:pointer;
+    }
+    .btn:hover {
+      background:var(--gold); color:#111; transform:translateY(-3px);
+      box-shadow:0 15px 35px rgba(212,175,55,0.25);
+    }
 
-        .section-title {
-            font-size: 2.2em;
-            color: #8a9a5b;
-            margin-bottom: 30px;
-            text-align: center;
-            border-bottom: 2px solid #4a5a3a;
-            padding-bottom: 10px;
-        }
+    /* Collection */
+    .collection { padding:12vh 5% 15vh; }
+    .section-title { text-align:center; font-size:clamp(2.8rem,6vw,5.5rem); margin-bottom:1.5rem; color:var(--gold); opacity:0.9; }
+    .subtitle { text-align:center; font-size:1.25rem; color:var(--text-light); margin-bottom:7vh; max-width:680px; margin-left:auto; margin-right:auto; }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
+    .grid {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+      gap:3rem; max-width:1400px; margin:0 auto;
+    }
 
-        .product-card {
-            background-color: #1a1f2e;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
-        }
+    .watch-card {
+      background:var(--card-bg); border-radius:12px; overflow:hidden;
+      border:1px solid rgba(212,175,55,0.06); transition:all 0.45s ease;
+    }
+    .watch-card:hover {
+      transform:translateY(-18px); border-color:var(--gold);
+      box-shadow:0 30px 70px rgba(0,0,0,0.5);
+    }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
+    .watch-img { height:380px; background:#111; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .watch-img img { width:92%; height:92%; object-fit:contain; transition:transform 0.7s ease; }
+    .watch-card:hover .watch-img img { transform:scale(1.08); }
 
-        .product-image {
-            height: 250px;
-            background-color: #2a2f42;
-            background-size: cover;
-            background-position: center;
-        }
+    .watch-info { padding:2rem 1.8rem; text-align:center; }
+    .watch-info h3 { font-size:1.55rem; margin-bottom:0.6rem; }
+    .price { font-size:1.4rem; color:var(--gold); font-weight:600; margin:0.8rem 0 1.4rem; }
 
-        .product-info {
-            padding: 20px;
-            text-align: center;
-        }
+    /* Cart Modal */
+    .cart-modal {
+      position:fixed; inset:0; background:rgba(0,0,0,0.85);
+      display:none; align-items:center; justify-content:center; z-index:2000;
+    }
+    .cart-modal.active { display:flex; }
+    .cart-content {
+      background:var(--card-bg); width:90%; max-width:600px; border-radius:16px;
+      padding:2.5rem; border:1px solid rgba(212,175,55,0.15); max-height:90vh; overflow-y:auto;
+    }
+    .cart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; }
+    .cart-header h2 { font-size:2rem; color:var(--gold); }
+    .close-cart { font-size:2rem; cursor:pointer; color:var(--text-light); }
+    .close-cart:hover { color:var(--gold); }
 
-        .product-info h3 {
-            font-size: 1.4em;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
+    .cart-item {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:1.2rem 0; border-bottom:1px solid rgba(212,175,55,0.1);
+    }
+    .cart-item:last-child { border-bottom:none; }
+    .item-info { flex:1; }
+    .item-info h4 { font-size:1.2rem; margin-bottom:0.4rem; }
+    .item-price { color:var(--gold); font-weight:600; }
+    .quantity {
+      display:flex; align-items:center; gap:0.8rem;
+      background:rgba(212,175,55,0.1); padding:0.4rem 1rem; border-radius:50px;
+    }
+    .qty-btn {
+      width:28px; height:28px; background:transparent; border:1px solid var(--gold);
+      color:var(--gold); border-radius:50%; cursor:pointer; font-size:1.1rem;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .qty-btn:hover { background:var(--gold); color:#000; }
+    .remove-item { color:#ff5555; cursor:pointer; font-size:1.3rem; }
 
-        .product-info p {
-            color: #a0a8b0;
-            font-size: 1.1em;
-            margin-bottom: 15px;
-        }
+    .cart-total { margin:2rem 0; font-size:1.4rem; text-align:right; }
+    .cart-total span { color:var(--gold); font-weight:600; font-size:1.6rem; }
 
-        .price {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #8a9a5b;
-        }
+    .btn-telegram {
+      background:#0088cc; border:none; color:white; width:100%;
+      padding:1.2rem; font-size:1.2rem; border-radius:50px; cursor:pointer;
+      margin-top:1.5rem; transition:all 0.3s;
+    }
+    .btn-telegram:hover { background:#006b9e; transform:translateY(-2px); }
 
-        footer {
-            background-color: #161b2a;
-            text-align: center;
-            padding: 30px;
-            margin-top: 80px;
-            color: #777;
-            font-size: 0.9em;
-        }
+    /* Contact Button & Modal */
+    .contact-btn {
+      position:fixed;
+      bottom:30px; right:30px;
+      width:70px; height:70px;
+      background:var(--gold);
+      color:#111;
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:2rem;
+      box-shadow:0 10px 30px rgba(212,175,55,0.4);
+      cursor:pointer;
+      z-index:1500;
+      transition:all 0.3s ease;
+    }
+    .contact-btn:hover {
+      transform:scale(1.1);
+      box-shadow:0 15px 40px rgba(212,175,55,0.5);
+    }
 
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5em;
-            }
-            nav a {
-                display: block;
-                margin: 10px 0;
-            }
-        }
-    </style>
+    .contact-modal {
+      position:fixed; inset:0; background:rgba(0,0,0,0.85);
+      display:none; align-items:center; justify-content:center; z-index:2000;
+    }
+    .contact-modal.active { display:flex; }
+    .contact-content {
+      background:var(--card-bg); width:90%; max-width:500px; border-radius:16px;
+      padding:3rem 2.5rem; border:1px solid rgba(212,175,55,0.2);
+    }
+    .contact-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; }
+    .contact-header h2 { font-size:2.2rem; color:var(--gold); }
+    .close-contact { font-size:2.5rem; cursor:pointer; color:var(--text-light); }
+    .close-contact:hover { color:var(--gold); }
+
+    .form-group { margin-bottom:1.5rem; }
+    .form-group label { display:block; margin-bottom:0.6rem; color:var(--text-light); font-weight:500; }
+    input, textarea {
+      width:100%; padding:0.9rem 1.2rem;
+      background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.2);
+      color:var(--text); border-radius:8px; font-size:1rem;
+      transition:border 0.3s;
+    }
+    input:focus, textarea:focus {
+      outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,0.15);
+    }
+    textarea { min-height:120px; resize:vertical; }
+
+    @media (max-width:768px) {
+      .contact-btn { bottom:20px; right:20px; width:60px; height:60px; font-size:1.8rem; }
+      nav { display:none; } /* burger à ajouter plus tard si besoin */
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>Dry.Coffee76</h1>
-    </header>
-
+<header id="header">
+  <div class="logo">Shop ta Watche</div>
+  <div class="nav-right">
     <nav>
-        <a href="#nouveaux">Nouveaux produits</a>
-        <a href="#fleurs">Fleurs</a>
-        <a href="#hash">Hash</a>
+      <a href="#collection" class="active">Collection</a>
+      <a href="#">À propos</a>
+      <a href="#">Contact</a>
     </nav>
+    <div class="cart-icon" id="open-cart">
+      🛒
+      <span class="cart-count" id="cart-count">0</span>
+    </div>
+  </div>
+</header>
 
-    <div class="container">
+<section class="hero">
+  <div class="hero-content">
+    <h1>L’Art<br>du Temps</h1>
+    <p>Pièces d’exception – Sélectionnées pour ceux qui ne suivent pas l’heure… ils la définissent.</p>
+    <a href="#collection" class="btn">Découvrir la collection</a>
+  </div>
+</section>
 
-        <h2 id="nouveaux" class="section-title">Nouveaux produits</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-image" style="background-image: url('https://via.placeholder.com/300x250/2a2f42/4a5a3a?text=Produit+1');"></div>
-                <div class="product-info">
-                    <h3>Premium Selection</h3>
-                    <p>Qualité supérieure, arômes intenses</p>
-                    <div class="price">29,90 €</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image" style="background-image: url('https://via.placeholder.com/300x250/2a2f42/4a5a3a?text=Produit+2');"></div>
-                <div class="product-info">
-                    <h3>Exotic Blend</h3>
-                    <p>Notes uniques et puissantes</p>
-                    <div class="price">34,90 €</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image" style="background-image: url('https://via.placeholder.com/300x250/2a2f42/4a5a3a?text=Produit+3');"></div>
-                <div class="product-info">
-                    <h3>Classic Reserve</h3>
-                    <p>Équilibré et raffiné</p>
-                    <div class="price">27,90 €</div>
-                </div>
-            </div>
-        </div>
+<section class="collection" id="collection">
+  <h2 class="section-title">Notre Collection</h2>
+  <p class="subtitle">Des garde-temps qui allient héritage horloger et design contemporain</p>
 
-        <h2 id="fleurs" class="section-title">Fleurs</h2>
-        <div class="products-grid">
-            <!-- Ajoute autant de cartes que tu veux -->
-            <div class="product-card">
-                <div class="product-image" style="background-image: url('https://via.placeholder.com/300x250/2a2f42/4a5a3a?text=Fleur+1');"></div>
-                <div class="product-info">
-                    <h3>Green Harmony</h3>
-                    <p>Arôme frais et naturel</p>
-                    <div class="price">32,90 €</div>
-                </div>
-            </div>
-            <!-- Plus de produits... -->
-        </div>
-
-        <h2 id="hash" class="section-title">Hash</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-image" style="background-image: url('https://via.placeholder.com/300x250/2a2f42/4a5a3a?text=Hash+1');"></div>
-                <div class="product-info">
-                    <h3>Traditional Press</h3>
-                    <p>Texture riche et authentique</p>
-                    <div class="price">39,90 €</div>
-                </div>
-            </div>
-            <!-- Plus de produits... -->
-        </div>
-
+  <div class="grid">
+    <div class="watch-card" data-id="1" data-name="Radiance Chronomètre" data-price="38900">
+      <div class="watch-img">
+        <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&q=80&w=800" alt="Montre 1">
+      </div>
+      <div class="watch-info">
+        <h3>Radiance Chronomètre</h3>
+        <div class="price">38 900 €</div>
+        <button class="btn add-to-cart">Ajouter au panier</button>
+      </div>
     </div>
 
-    <footer>
-        © 2026 Dry.Coffee76 - Tous droits réservés
-    </footer>
+    <div class="watch-card" data-id="2" data-name="Obsidian Tourbillon" data-price="64500">
+      <div class="watch-img">
+        <img src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&q=80&w=800" alt="Montre 2">
+      </div>
+      <div class="watch-info">
+        <h3>Obsidian Tourbillon</h3>
+        <div class="price">64 500 €</div>
+        <button class="btn add-to-cart">Ajouter au panier</button>
+      </div>
+    </div>
 
+    <div class="watch-card" data-id="3" data-name="Legacy Perpetual" data-price="29750">
+      <div class="watch-img">
+        <img src="https://images.unsplash.com/photo-1523177577-2923e2f37c74?auto=format&fit=crop&q=80&w=800" alt="Montre 3">
+      </div>
+      <div class="watch-info">
+        <h3>Legacy Perpetual</h3>
+        <div class="price">29 750 €</div>
+        <button class="btn add-to-cart">Ajouter au panier</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Panier (inchangé) -->
+<div class="cart-modal" id="cart-modal">
+  <div class="cart-content">
+    <div class="cart-header">
+      <h2>Votre Panier</h2>
+      <span class="close-cart" id="close-cart">×</span>
+    </div>
+    <div id="cart-items"></div>
+    <div class="cart-total">Total : <span id="cart-total">0 €</span></div>
+    <button class="btn-telegram" id="order-telegram">Commander via Telegram</button>
+  </div>
+</div>
+
+<!-- Modal Contact -->
+<div class="contact-modal" id="contact-modal">
+  <div class="contact-content">
+    <div class="contact-header">
+      <h2>Contactez-nous</h2>
+      <span class="close-contact" id="close-contact">×</span>
+    </div>
+    <form id="contact-form">
+      <div class="form-group">
+        <label for="name">Votre nom</label>
+        <input type="text" id="name" placeholder="Zakaria" required>
+      </div>
+      <div class="form-group">
+        <label for="contact">Email ou Téléphone</label>
+        <input type="text" id="contact" placeholder="ex: zakaria@example.com ou +33..." required>
+      </div>
+      <div class="form-group">
+        <label for="message">Votre message</label>
+        <textarea id="message" placeholder="Bonjour, je suis intéressé par la montre Radiance Chronomètre..." required></textarea>
+      </div>
+      <button type="submit" class="btn-telegram">Envoyer sur Telegram</button>
+    </form>
+  </div>
+</div>
+
+<!-- Bouton Contact fixe -->
+<div class="contact-btn" id="open-contact">✉</div>
+
+<footer style="background:#0a0a0a; padding:6rem 5% 3rem; text-align:center; border-top:1px solid rgba(212,175,55,0.08);">
+  <p>Shop ta Watche — L’élégance n’attend pas</p>
+  <p>© 2026 Shop ta Watche. Tous droits réservés.</p>
+</footer>
+
+<script>
+// ─── Navigation scroll ───
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ─── Panier (code précédent conservé) ───
+let cart = JSON.parse(localStorage.getItem('shopTaWatcheCart')) || [];
+
+const cartCount = document.getElementById('cart-count');
+const cartModal = document.getElementById('cart-modal');
+const cartItemsDiv = document.getElementById('cart-items');
+const cartTotal = document.getElementById('cart-total');
+const openCart = document.getElementById('open-cart');
+const closeCart = document.getElementById('close-cart');
+const orderTelegram = document.getElementById('order-telegram');
+
+function saveCart() { localStorage.setItem('shopTaWatcheCart', JSON.stringify(cart)); updateCartCount(); }
+function updateCartCount() {
+  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  cartCount.textContent = totalItems;
+}
+
+function renderCart() {
+  cartItemsDiv.innerHTML = '';
+  let total = 0;
+  cart.forEach((item, index) => {
+    total += item.price * item.qty;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <div class="item-info">
+        <h4>${item.name}</h4>
+        <div class="item-price">${(item.price).toLocaleString()} €</div>
+      </div>
+      <div class="quantity">
+        <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+        <span>${item.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+      </div>
+      <span class="remove-item" onclick="removeFromCart(${index})">×</span>
+    `;
+    cartItemsDiv.appendChild(div);
+  });
+  cartTotal.textContent = total.toLocaleString() + ' €';
+}
+
+window.changeQty = function(index, delta) {
+  cart[index].qty += delta;
+  if (cart[index].qty < 1) cart[index].qty = 1;
+  saveCart(); renderCart();
+}
+window.removeFromCart = function(index) {
+  cart.splice(index, 1);
+  saveCart(); renderCart();
+}
+
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.watch-card');
+    const id = card.dataset.id;
+    const name = card.dataset.name;
+    const price = Number(card.dataset.price);
+    const existing = cart.find(item => item.id === id);
+    if (existing) existing.qty++; else cart.push({ id, name, price, qty: 1 });
+    saveCart(); renderCart();
+    alert(`${name} ajouté au panier !`);
+  });
+});
+
+openCart.addEventListener('click', () => { renderCart(); cartModal.classList.add('active'); });
+closeCart.addEventListener('click', () => cartModal.classList.remove('active'));
+cartModal.addEventListener('click', e => { if (e.target === cartModal) cartModal.classList.remove('active'); });
+
+orderTelegram.addEventListener('click', () => {
+  if (cart.length === 0) return alert("Votre panier est vide !");
+  let message = "Nouvelle commande Shop ta Watche :\n\n";
+  let total = 0;
+  cart.forEach(item => {
+    message += `• ${item.name} × ${item.qty} = ${(item.price * item.qty).toLocaleString()} €\n`;
+    total += item.price * item.qty;
+  });
+  message += `\nTotal : ${total.toLocaleString()} €\n\nCordialement`;
+  const url = `https://t.me/fournisseur0000?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+});
+
+// ─── Contact Modal ───
+const contactModal = document.getElementById('contact-modal');
+const openContact = document.getElementById('open-contact');
+const closeContact = document.getElementById('close-contact');
+const contactForm = document.getElementById('contact-form');
+
+openContact.addEventListener('click', () => contactModal.classList.add('active'));
+closeContact.addEventListener('click', () => contactModal.classList.remove('active'));
+contactModal.addEventListener('click', e => { if (e.target === contactModal) contactModal.classList.remove('active'); });
+
+contactForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if (!name || !contact || !message) return alert("Veuillez remplir tous les champs !");
+
+  const telegramMsg = `Nouveau message depuis Shop ta Watche\n\nNom: ${name}\nContact: ${contact}\n\nMessage:\n${message}`;
+  const url = `https://t.me/fournisseur0000?text=${encodeURIComponent(telegramMsg)}`;
+  window.open(url, '_blank');
+
+  // Reset form
+  contactForm.reset();
+  contactModal.classList.remove('active');
+  alert("Message prêt à être envoyé sur Telegram !");
+});
+
+// Init
+updateCartCount();
+</script>
 </body>
 </html>
